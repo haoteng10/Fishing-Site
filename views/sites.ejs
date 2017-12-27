@@ -1,0 +1,35 @@
+<% include partials/header %>
+
+<div class="container">
+
+<h1>Fishing Sites</h1>
+
+<p>Here is all fishing sites:</p>
+
+<div>
+    
+    <div class="input-field col s12">
+    <select name="city" form="city">
+        <optgroup label="New York">
+            <option value="NYC" >New York City</option>
+        </optgroup>
+        <optgroup label="California">
+            <option value="LA">Los Angelas</option>
+         </optgroup>
+        </select>
+        <label>Cities</label>    
+    </div>
+    
+    <form action="/sites/locate" method="POST" id="city">
+      <button class="btn">Search</button>
+    </form>
+
+</div>
+
+<p>
+<a href="/" class="btn">Click here to return home</a>
+</p>
+
+<% include partials/footer %>
+
+</div> <!--end Container-->
