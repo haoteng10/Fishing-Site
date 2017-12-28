@@ -1,0 +1,14 @@
+<% include partials/header %>
+<div class = "container">
+    
+    <div class = "row">
+        <h1><%= site.name %></h1>
+    </div>
+   
+    <div class = "row">
+        <p><img class="materialboxed" data-caption="<%= site.name %>" width="550" src="<%= site.url %>"></p>
+        <p><%= site.description %></p>
+    </div>
+</div>
+
+<% include partials/footer %>

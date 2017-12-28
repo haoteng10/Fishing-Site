@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
+// var ejsLint = require('ejs-lint');
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,20 +18,27 @@ var siteSchema = new mongoose.Schema({
    description: String
 });
 
-var Site = mongoose.model("Site", siteSchema);
-
-
-// var fishingSite = [{
-//     name: "Great Grand Park",
-//     url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84UgoxCM4rb51iQm-AxgYKxijqTPoTF-Ge59RtNJRQPnvqVsv"}
-//     ];
+var Sites = mongoose.model("Site", siteSchema);
 
 app.get("/", function(req,res){
       res.render("landing");
 });
 
+var userValue;
+
+app.post("/sites/locate", function(req, res) {
+    userValue = req.body.city;
+    res.redirect("/sites");
+});
+
 app.get("/sites", function(req,res){
-      res.render("sites");
+    Sites.find({}, function(err, allSites){
+        if(err){
+        console.log(err);
+       } else {
+          res.render("sites",{Sites:allSites, value:userValue});
+       }
+    });
 });
 
 app.post("/sites", function(req,res){
@@ -42,7 +50,7 @@ app.post("/sites", function(req,res){
     var newSite = {name: name, url: url, location: location, description: desc};
     
     // Create a new campground and save to DB
-    Site.create(newSite, function(err, newlyCreated){
+    Sites.create(newSite, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -57,23 +65,21 @@ app.get("/sites/new",function(req, res) {
    res.render("new"); 
 });
 
-// app.post("/sites/locate",function(req, res) {
-//     var value = req.body.city;
-//     if (value === "NYC") {
-//         res.redirect("/sites/nyc");
-//     }else{
-//       res.redirect("/error"); 
-//     }
-// });
 
 app.get("/sites/:id",function(req, res) {
-    res.redirect("/error");
-})
+    Sites.findById(req.params.id, function(err, foundSite){
+        if(err){
+            console.log(err);
+        } else {
+            //render show template with that fishingSite
+            res.render("show", {site: foundSite});
+        }});
+    });
 
 app.get("/error",function(req, res) {
     res.render("construction");
-})
+});
 
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("The server has been started!");
+   console.log("The Server Has Started!");
 });
