@@ -2,7 +2,6 @@ var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-// var ejsLint = require('ejs-lint');
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -18,27 +17,21 @@ var siteSchema = new mongoose.Schema({
    description: String
 });
 
-var Sites = mongoose.model("Site", siteSchema);
+var Site = mongoose.model("Site", siteSchema);
+
+
+// var fishingSite = [{
+//     name: "Great Grand Park",
+//     url : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84UgoxCM4rb51iQm-AxgYKxijqTPoTF-Ge59RtNJRQPnvqVsv"}
+//     ];
 
 app.get("/", function(req,res){
       res.render("landing");
 });
 
-var userValue;
-
-app.post("/sites/locate", function(req, res) {
-    userValue = req.body.city;
-    res.redirect("/sites");
-});
-
 app.get("/sites", function(req,res){
-    Sites.find({}, function(err, allSites){
-        if(err){
-        console.log(err);
-       } else {
-          res.render("sites",{Sites:allSites, value:userValue});
-       }
-})});
+      res.render("sites");
+});
 
 app.post("/sites", function(req,res){
     // get data from form and add to fishing sites array
@@ -49,7 +42,7 @@ app.post("/sites", function(req,res){
     var newSite = {name: name, url: url, location: location, description: desc};
     
     // Create a new campground and save to DB
-    Sites.create(newSite, function(err, newlyCreated){
+    Site.create(newSite, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -64,15 +57,23 @@ app.get("/sites/new",function(req, res) {
    res.render("new"); 
 });
 
+// app.post("/sites/locate",function(req, res) {
+//     var value = req.body.city;
+//     if (value === "NYC") {
+//         res.redirect("/sites/nyc");
+//     }else{
+//       res.redirect("/error"); 
+//     }
+// });
 
 app.get("/sites/:id",function(req, res) {
     res.redirect("/error");
-});
+})
 
 app.get("/error",function(req, res) {
     res.render("construction");
-});
+})
 
 app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The Server Has Started!");
+    console.log("The server has been started!");
 });
