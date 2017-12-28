@@ -1,37 +1,23 @@
 <% include partials/header %>
 
 <div class="container">
+    <h1>Fishing Sites</h1>
 
-<h1>Fishing Sites</h1>
-
-<p>Here is all fishing sites:</p>
-
-<div>
-    <div class="input-field col s12">
-    <select name="city" form="city">
-        <optgroup label="New York">
-            <option value="NYC" >New York City</option>
-        </optgroup>
-        <optgroup label="California">
-            <option value="LA">Los Angelas</option>
-         </optgroup>
-        </select>
-        <label>Cities</label>    
+    <div class="row">
+        <% Sites.forEach(function(site){ %>
+            <% if((value === "NYC") && (site.location === "NYC")){ %>
+                <div class="col md3 sm6">
+                    <img class="materialboxed" data-caption="<%= site.name %>" width="250" src="<%= site.url %>">
+                </div>
+            <% } else if ((value === "LA") && (site.location === "LA")){ %>
+                   <img class="materialboxed" data-caption="<%= site.name %>" width="250" src="<%= site.url %>">
+        <% } %>
+        <% }); %>
     </div>
     
-    <form action="/sites/locate" method="POST" id="city">
-      <button class="btn">Search</button>
-    </form>
-</div>
-
-<div>
-    <p><a href="/sites/new" class="btn">New</a></p>
-</div>
-
-<!--<p>-->
-<!--<a href="/" class="btn">Click here to return home</a>-->
-<!--</p>-->
-
-<% include partials/footer %>
-
-</div> <!--end Container-->
+    <div class="row">
+        <p><a href="/sites/new" class="btn">New</a></p>
+    </div>
+    
+    <% include partials/footer %>
+</div> 
