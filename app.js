@@ -39,7 +39,7 @@ app.post("/sites", function(req,res){
     var url = req.body.url;
     var location = req.body.loc;
     var desc = req.body.description;
-    var newSite = {name: name, url: url, location: location, description: desc}
+    var newSite = {name: name, url: url, location: location, description: desc};
     
     // Create a new campground and save to DB
     Site.create(newSite, function(err, newlyCreated){
