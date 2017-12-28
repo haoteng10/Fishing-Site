@@ -6,15 +6,28 @@
     <div class="row">
         <% Sites.forEach(function(site){ %>
             <% if(((value === "NYC") && (site.location === "NYC")) || ((value === "LA") && (site.location === "LA"))){ %>
-                <div class="col md3 sm6">
-                    <img class="materialboxed" data-caption="<%= site.name %>" width="250" src="<%= site.url %>">
-                    <a href="/sites/<%= site._id %>" class="btn">More Info</a>
+                <div class="row">
+                    <div class="col s12 m7">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="<%= site.url %>" width="300">
+                          <span class="card-title"><%= site.name %></span>
+                        </div>
+                        <div class="card-content">
+                          <p><%= site.description %></p>
+                        </div>
+                        <div class="card-action">
+                          <a href="/sites/<%= site._id %>">More Info</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             <% } %>
         <% }); %>
     </div>
     
-    <div class="row">
+    <div class="row" style="margin: 200px 200px">
         <p><a href="/sites/new" class="btn">New</a></p>
     </div>
 
