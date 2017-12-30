@@ -2,18 +2,18 @@
 
 <div class = "container" style="margin: auto; width: 50%; height: 50%;">
     <div class= "row">
-        <form action="/sites" method="POST" id = "new">
+        <form action="/sites/<%= site._id %>?_method=PUT" method="post" id = "edit">
             <div class="input-field col s12">
-              <input placeholder="JacksonHeight lake" name="site[name]" type="text" class="validate" form="new">
+              <input placeholder="JacksonHeight lake" id="name" type="text" class="validate" name="site[name]" form="edit" value="<%= site.name %>">
               <label for="name">Name</label>
         </div>
         <div class="row">
             <div class="input-field col s12">
-              <input placeholder="http://your-domain.whatever/whatever" name="site[url]" type="text" form="new">
+              <input placeholder="http://your-domain.whatever/whatever" id="url" type="text" name="site[url]" form="edit" value="<%= site.url %>">
               <label for="url">Image URL</label>
         </div>
         <div class="input-field col s12">
-            <select name="site[location]" form="new">
+            <select name="site[location]" form="edit" value="<%= site.location %>">
                 <optgroup label="New York">
                     <option value="NYC" >New York City</option>
                 </optgroup>
@@ -25,7 +25,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-              <input placeholder="description" name="site[description]" type="text" form="new">
+              <input placeholder="description" id="description" type="text" name="site[description]" form="edit" value="<%= site.description %>">
               <label for="description">Description</label>
         </div>
         <div class = "row">
@@ -34,7 +34,5 @@
         </form>
     </div>
 </div>
-
-
 
 <% include partials/footer %>

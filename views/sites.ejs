@@ -5,12 +5,12 @@
 
     <div class="row">
         <% Sites.forEach(function(site){ %>
-            <% if(((value === "NYC") && (site.location === "NYC")) || ((value === "LA") && (site.location === "LA"))){ %>
+            <% if(value === site.location){ %>
                 <div class="row">
-                    <div class="col s12 m7">
+                    <div class="col s12 m6 l4 stick">
                       <div class="card">
                         <div class="card-image">
-                          <img src="<%= site.url %>" width="300">
+                          <img src="<%= site.url %>" width="50%">
                           <span class="card-title"><%= site.name %></span>
                         </div>
                         <div class="card-content">
@@ -19,15 +19,18 @@
                         <div class="card-action">
                           <a href="/sites/<%= site._id %>">More Info</a>
                         </div>
-                      </div>
-                    </div>
-                  </div>
+                        <div>
+                           <form action="/sites/<%= site._id %>?_method=delete" method="POST" id="delete">
+                            <button class="btn">Delete</button>
+                          </form>
+                        </div>  
+                    </div>  
                 </div>
-            <% } %>
+              <% } %>
         <% }); %>
     </div>
     
-    <div class="row" style="margin: 200px 200px">
+    <div class="row container">
         <p><a href="/sites/new" class="btn">New</a></p>
     </div>
 

@@ -2,13 +2,13 @@ var express = require("express");
 var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-// var ejsLint = require('ejs-lint');
+var methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 mongoose.connect("mongodb://localhost/fishing_site", {useMongoClient: true});
-
 
 // SCHEMA SETUP
 var siteSchema = new mongoose.Schema({
@@ -42,15 +42,9 @@ app.get("/sites", function(req,res){
 });
 
 app.post("/sites", function(req,res){
-    // get data from form and add to fishing sites array
-    var name = req.body.name;
-    var url = req.body.url;
-    var location = req.body.loc;
-    var desc = req.body.description;
-    var newSite = {name: name, url: url, location: location, description: desc};
     
-    // Create a new campground and save to DB
-    Sites.create(newSite, function(err, newlyCreated){
+    // Create a new fishingSite and save to DB
+    Sites.create(req.body.site, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -75,6 +69,38 @@ app.get("/sites/:id",function(req, res) {
             res.render("show", {site: foundSite});
         }});
     });
+
+app.delete("/sites/:id", function(req,res) {
+   Sites.findById(req.params.id, function(err, site){
+       if (err){
+           res.redirect("/error");
+       } else {
+           site.remove();
+           res.redirect("/sites");
+       }
+   }) 
+});
+
+app.get("/sites/:id/edit", function(req, res){
+    Sites.findById(req.params.id, function(err, foundSite){
+        if(err){
+            res.redirect("/error");
+        } else {
+            res.render("edit", {site: foundSite});
+        }
+    });
+})
+
+app.put("/sites/:id", function(req,res){
+    Sites.findByIdAndUpdate(req.params.id, req.body.site, function(err, wholeNewSite){
+        if (err){
+            console.log(err);
+            res.redirect("/error");
+        } else {
+            res.redirect("/sites/" + req.params.id);
+        }
+    }); 
+});
 
 app.get("/error",function(req, res) {
     res.render("construction");

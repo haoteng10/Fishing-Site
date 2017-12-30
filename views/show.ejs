@@ -6,8 +6,12 @@
     </div>
    
     <div class = "row">
-        <p><img class="materialboxed" data-caption="<%= site.name %>" width="550" src="<%= site.url %>"></p>
+        <p><img class="materialboxed" data-caption="<%= site.name %>" width="75%" src="<%= site.url %>"></p>
         <p><%= site.description %></p>
+    </div>
+    
+    <div class ="row">
+        <a href="/sites/<%= site._id %>/edit" class="btn">Edit</a>
     </div>
 </div>
 
