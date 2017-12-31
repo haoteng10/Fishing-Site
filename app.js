@@ -3,6 +3,7 @@ var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
+var Sites = require("./models/FishingSite");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -10,15 +11,6 @@ app.use(methodOverride("_method"));
 
 mongoose.connect("mongodb://localhost/fishing_site", {useMongoClient: true});
 
-// SCHEMA SETUP
-var siteSchema = new mongoose.Schema({
-   name: String,
-   url: String,
-   location: String,
-   description: String
-});
-
-var Sites = mongoose.model("Site", siteSchema);
 
 app.get("/", function(req,res){
       res.render("landing");
@@ -36,7 +28,7 @@ app.get("/sites", function(req,res){
         if(err){
         console.log(err);
        } else {
-          res.render("sites",{Sites:allSites, value:userValue});
+          res.render("FishingSites/sites",{Sites:allSites, value:userValue});
        }
     });
 });
@@ -66,7 +58,7 @@ app.get("/sites/:id",function(req, res) {
             console.log(err);
         } else {
             //render show template with that fishingSite
-            res.render("show", {site: foundSite});
+            res.render("FishingSites/show", {site: foundSite});
         }});
     });
 
@@ -86,7 +78,7 @@ app.get("/sites/:id/edit", function(req, res){
         if(err){
             res.redirect("/error");
         } else {
-            res.render("edit", {site: foundSite});
+            res.render("FishingSites/edit", {site: foundSite});
         }
     });
 })

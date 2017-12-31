@@ -1,0 +1,40 @@
+<% include ../partials/header %>
+
+<div class = "container" style="margin: auto; width: 50%; height: 50%;">
+    <div class= "row">
+        <form action="/sites" method="POST" id = "new">
+            <div class="input-field col s12">
+              <input placeholder="JacksonHeight lake" name="site[name]" type="text" class="validate" form="new">
+              <label for="name">Name</label>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="http://your-domain.whatever/whatever" name="site[url]" type="text" form="new">
+              <label for="url">Image URL</label>
+        </div>
+        <div class="input-field col s12">
+            <select name="site[location]" form="new">
+                <optgroup label="New York">
+                    <option value="NYC" >New York City</option>
+                </optgroup>
+                <optgroup label="California">
+                    <option value="LA">Los Angelas</option>
+                 </optgroup>
+            </select>
+            <label>Choose the location</label>    
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="description" name="site[description]" type="text" form="new">
+              <label for="description">Description</label>
+        </div>
+        <div class = "row">
+            <button class = "waves-effect waves-light btn">Sumbit!</button>
+        </div>
+        </form>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>

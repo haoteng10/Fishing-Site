@@ -1,13 +1,24 @@
     <div class="container">
-      <footer>Trademark by MysteryQ</footer>
+      <footer>Created by Project Team</footer>
     </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-    <script>
-      $(document).ready(function() {
-      $('select').material_select();
+      <!-- Import JQuery -->
+      <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+      <!--JavaScript at end of body for optimized loading-->
+      <!--<script type="text/javascript" src="../Public/js/materialize.min.js"></script>-->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.2/js/materialize.min.js"></script>
+
+      <script type="text/javascript">  
+      $(document).ready(function(){
+      $('select').select();
       });
-  </script>
+      $(document).ready(function(){
+      $('.materialboxed').materialbox();
+      });
+
+      </script>
  
     </body>
 </html>

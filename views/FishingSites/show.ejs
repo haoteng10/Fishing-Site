@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+<div class = "container">
+    
+    <div class = "row">
+        <h1><%= site.name %></h1>
+    </div>
+   
+    <div class = "row">
+        <p><img class="materialboxed" width="300px" src="<%= site.url %>"></p>
+        <p><%= site.description %></p>
+    </div>
+    
+    <div class ="row">
+        <a href="/sites/<%= site._id %>/edit" class="btn">Edit</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>
