@@ -8,6 +8,7 @@ var Sites = require("./models/FishingSite");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
+app.use(express.static(__dirname + "/public"));
 
 mongoose.connect("mongodb://localhost/fishing_site", {useMongoClient: true});
 
