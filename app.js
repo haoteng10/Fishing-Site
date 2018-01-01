@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var Sites = require("./models/FishingSite");
+var SeedDB = require("./seeds");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -12,6 +13,7 @@ app.use(express.static(__dirname + "/public"));
 
 mongoose.connect("mongodb://localhost/fishing_site", {useMongoClient: true});
 
+SeedDB();
 
 app.get("/", function(req,res){
       res.render("landing");
