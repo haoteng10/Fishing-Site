@@ -16,9 +16,11 @@ SeedDB();
 
 var indexRoutes = require("./routes/index");
 var sitesRoutes = require("./routes/FishingSites");
+var commentRoutes = require("./routes/Comments");
 
 app.use("/", indexRoutes);
 app.use("/sites", sitesRoutes);
+app.use("/sites/:id/comments", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("The Server Has Started!");

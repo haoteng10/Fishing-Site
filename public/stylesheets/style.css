@@ -1,3 +1,9 @@
-#stick {
+.stick {
     display: inline;
-}                                                                                                                                                                               
+} 
+
+.more-margin {
+    margin: auto; 
+    width: 50%; 
+    height: 50%;
+}

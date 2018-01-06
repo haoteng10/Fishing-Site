@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Sites = require("./models/FishingSite");
+var Comment = require("./models/Comment");
 
 var data = [
     {
@@ -30,13 +31,25 @@ function SeedDB(){
         } else {
             console.log("FishingSites removed.");
             data.forEach(function(seed){
-            Sites.create(seed, function(err, site){
-                if(err){
-                    console.log(err);
-                } else {
-                    console.log("added a fishing-site");
+                Sites.create(seed, function(err, createdSite){
+                    if(err){
+                        console.log(err);
+                    } else {
+                        console.log("added a fishing-site");
+                        Comment.create({text: "Blah Blah Blah", author: "Default"}, function(err, createdComment){
+                            if (err){
+                                console.log(err);
+                            } else {
+                                createdSite.comments.push(createdComment);
+                                createdSite.save();
+                                console.log("Comment created and saved");
+                            }
+                        })
+                    }
+                });
+            });
         }
     });
-})}})}
+}
 
 module.exports = SeedDB; 
