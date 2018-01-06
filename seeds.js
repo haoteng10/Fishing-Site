@@ -20,6 +20,12 @@ var data = [
         url: "https://images.adsttc.com/media/images/5683/4ff5/e58e/ce62/ae00/01d1/large_jpg/6869712174_d403e7cc54_o.jpg?1451446232",
         location: "LA",
         description: "A manned made river. I don't think you can fish here."
+    },
+    {
+        name: "Central Park Lake",
+        url: "https://cdn.asherfergusson.com/wp-content/uploads/2011/10/plaza-hotel-new-york-city-central-park-lake.jpg",
+        location: "NYC",
+        description: "A lake in Cnetral Park. No Fish"
     }
 ]
 
