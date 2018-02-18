@@ -58,4 +58,15 @@ router.put("/:commentId", function(req, res){
     });
 });
 
+// COMMENT DESTROY ROUTE
+router.delete("/:commentId", function(req, res){
+    Comments.findByIdAndRemove(req.params.commentId, function(err){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/sites/" + req.params.id);
+        }
+    }); 
+});
+
 module.exports = router;

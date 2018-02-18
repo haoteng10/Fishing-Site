@@ -27,6 +27,9 @@
                   <span class="title"><%= foundComment.author %></span>
                   <p><%= foundComment.text %><br>
                       <a href="/sites/<%= site._id %>/comments/<%= foundComment._id %>/edit" class="btn">Edit</a>
+                      <form id="delete-form" action="/sites/<%=site._id %>/comments/<%=foundComment._id %>?_method=DELETE" method="POST">
+                          <input type="submit" class="btn red darken-4" value="Delete">
+                      </form>
                   </p>
                   <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
               </li>
