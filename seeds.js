@@ -25,9 +25,9 @@ var data = [
         name: "Central Park Lake",
         url: "https://cdn.asherfergusson.com/wp-content/uploads/2011/10/plaza-hotel-new-york-city-central-park-lake.jpg",
         location: "NYC",
-        description: "A lake in Cnetral Park. No Fish"
+        description: "A lake in Central Park. No Fish"
     }
-]
+];
 
 function SeedDB(){
     // Remove all fishing-sites
@@ -60,18 +60,18 @@ function SeedDB(){
                                             } else {
                                                 createdSite.comments.push(createdSecondComment);
                                                 createdSite.save();
-                                                console.log("Second comment created and saved@");
+                                                console.log("Second comment created and saved.");
                                             }
-                                        })
+                                        });
                                     }
-                                })
+                                });
                             }
                         });
                     });
                 }
     });
     }
-})                    
+});                    
 }
 
 module.exports = SeedDB; 
