@@ -1,0 +1,28 @@
+<% include ../partials/header %>
+
+<div class = "container more-margin">
+    <h1>You are editing a comment to: <%= comment.text %></h1>
+    <div class= "row">
+        <form action="/sites/<%= site_id %>/comments/<%= comment._id %>?_method=PUT" method="POST" id = "new">
+            
+            <div class="row">
+                <div class="input-field col s12">
+                  <input placeholder="comment" name="comment[text]" type="text" class="validate" form="new" id="text" value="<%= comment.text %>">
+                  <label for="text">Text</label>
+                </div> 
+            </div>
+             
+             <div class = "row">
+                <div class="input-field col s12">
+                    <input placeholder="author" name="comment[author]" type="text" class="validate" form="new" id="author" value="<%= comment.author %>">
+                    <label for="author">Author</label>
+                </div>
+            </div>
+            
+            <button class = "waves-effect waves-light btn">Sumbit!</button>
+            
+        </form>
+    </div>
+</div>
+
+<% include ../partials/footer %>

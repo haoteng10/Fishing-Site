@@ -25,18 +25,15 @@
               <li class="collection-item avatar">
                   <img src="" alt="" class="circle">
                   <span class="title"><%= foundComment.author %></span>
-                  <p><%= foundComment.text %></p>
+                  <p><%= foundComment.text %><br>
+                      <a href="/sites/<%= site._id %>/comments/<%= foundComment._id %>/edit" class="btn">Edit</a>
+                  </p>
                   <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
               </li>
          <% }) %>
         </ul>
     </div>
     
-    <div class = "row">
-        <% site.comments.forEach(function (theComment){%>
-            <%= theComment.text %>
-        <% }) %>
-    </div>
     
 </div>
 
