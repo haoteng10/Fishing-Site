@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Sites = require("../models/FishingSite");
+var Comments = require("../models/Comment")
 
 var userValue;
 
@@ -39,7 +40,7 @@ router.get("/new",function(req, res) {
 
 
 router.get("/:id",function(req, res) {
-    Sites.findById(req.params.id, function(err, foundSite){
+    Sites.findById(req.params.id).populate("comments").exec(function(err, foundSite){
         if(err){
             console.log(err);
         } else {

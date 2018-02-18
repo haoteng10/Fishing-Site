@@ -18,6 +18,26 @@
     <div class ="row">
         <a href="/sites/<%= site._id %>/comments/new" class="btn">Add a new comment</a>
     </div>
+    
+    <div class="row">
+        <ul class="collection">
+            <% site.comments.forEach(function(foundComment){ %>
+              <li class="collection-item avatar">
+                  <img src="" alt="" class="circle">
+                  <span class="title"><%= foundComment.author %></span>
+                  <p><%= foundComment.text %></p>
+                  <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              </li>
+         <% }) %>
+        </ul>
+    </div>
+    
+    <div class = "row">
+        <% site.comments.forEach(function (theComment){%>
+            <%= theComment.text %>
+        <% }) %>
+    </div>
+    
 </div>
 
 <% include ../partials/footer %>

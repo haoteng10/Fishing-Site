@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Sites = require("./models/FishingSite");
-var Comment = require("./models/Comment");
+var Comments = require("./models/Comment");
 
 var data = [
     {
@@ -36,26 +36,42 @@ function SeedDB(){
             console.log(err);
         } else {
             console.log("FishingSites removed.");
-            data.forEach(function(seed){
-                Sites.create(seed, function(err, createdSite){
-                    if(err){
-                        console.log(err);
-                    } else {
-                        console.log("added a fishing-site");
-                        Comment.create({text: "Blah Blah Blah", author: "Default"}, function(err, createdComment){
-                            if (err){
+            Comments.remove({}, function (err) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Comments removed.");
+                    data.forEach(function(seed){
+                        Sites.create(seed, function(err, createdSite){
+                            if(err){
                                 console.log(err);
                             } else {
-                                createdSite.comments.push(createdComment);
-                                createdSite.save();
-                                console.log("Comment created and saved");
+                                console.log("added a fishing-site");
+                                Comments.create({text: "Blah Blah Blah", author: "Default"}, function(err, createdComment){
+                                    if (err){
+                                        console.log(err);
+                                    } else {
+                                        createdSite.comments.push(createdComment);
+                                        createdSite.save();
+                                        console.log("First Comment created and saved");
+                                        Comments.create({text:"DU DU B", author: "Default2"}, function(err,createdSecondComment){
+                                            if (err){
+                                                console.log(err);
+                                            } else {
+                                                createdSite.comments.push(createdSecondComment);
+                                                createdSite.save();
+                                                console.log("Second comment created and saved@");
+                                            }
+                                        })
+                                    }
+                                })
                             }
-                        })
-                    }
-                });
-            });
-        }
+                        });
+                    });
+                }
     });
+    }
+})                    
 }
 
 module.exports = SeedDB; 
