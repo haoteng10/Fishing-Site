@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 var Sites = require("../models/FishingSite");
-var Comments = require("../models/Comment")
+// var Comments = require("../models/Comment");
+var middleware = require("../middleware");
 
 var userValue;
 
@@ -20,10 +21,19 @@ router.get("/", function(req,res){
     });
 });
 
-router.post("/", function(req,res){
-    
+router.post("/", middleware.isLoggedIn, function(req,res){
+    var newlyCreatedSite = {
+      name: req.body.site.name,
+      url: req.body.site.url,
+      description: req.body.site.description,
+      location: req.body.site.location,
+      author: {
+          id: req.user._id,
+          username: req.user.username
+      }
+    };
     // Create a new fishingSite and save to DB
-    Sites.create(req.body.site, function(err, newlyCreated){
+    Sites.create(newlyCreatedSite, function(err, newlyCreated){
         if(err){
             console.log(err);
         } else {
@@ -34,7 +44,7 @@ router.post("/", function(req,res){
     
 });
 
-router.get("/new",function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
    res.render("FishingSites/new"); 
 });
 
@@ -49,7 +59,7 @@ router.get("/:id",function(req, res) {
         }});
     });
 
-router.delete("/:id", function(req,res) {
+router.delete("/:id", middleware.checkSiteOwnership, function(req,res) {
    Sites.findById(req.params.id, function(err, site){
        if (err){
            res.redirect("/error");
@@ -60,7 +70,7 @@ router.delete("/:id", function(req,res) {
    }) 
 });
 
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", middleware.checkSiteOwnership, function(req, res){
     Sites.findById(req.params.id, function(err, foundSite){
         if(err){
             res.redirect("/error");
@@ -70,7 +80,7 @@ router.get("/:id/edit", function(req, res){
     });
 })
 
-router.put("/:id", function(req,res){
+router.put("/:id", middleware.checkSiteOwnership, function(req,res){
     Sites.findByIdAndUpdate(req.params.id, req.body.site, function(err, wholeNewSite){
         if (err){
             console.log(err);

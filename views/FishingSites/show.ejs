@@ -23,8 +23,8 @@
         <ul class="collection">
             <% site.comments.forEach(function(foundComment){ %>
               <li class="collection-item avatar">
-                  <img src="" alt="" class="circle">
-                  <span class="title"><%= foundComment.author %></span>
+                  <img src="http://www.florencevillas.com/assets/73755607/images/img-testimonial.jpg" alt="" class="circle">
+                  <span class="title"><%= foundComment.author.username %></span>
                   <p><%= foundComment.text %><br>
                       <a href="/sites/<%= site._id %>/comments/<%= foundComment._id %>/edit" class="btn">Edit</a>
                       <form id="delete-form" action="/sites/<%=site._id %>/comments/<%=foundComment._id %>?_method=DELETE" method="POST">
