@@ -11,9 +11,13 @@
         <p><%= site.description %></p>
     </div>
     
-    <div class ="row">
-        <a href="/sites/<%= site._id %>/edit" class="btn">Edit</a>
-    </div>
+    <% if (isAuthenticated()) { %>
+        <% if (site.author.id.equals(currentUser._id)) { %>
+            <div class ="row">
+                <a href="/sites/<%= site._id %>/edit" class="btn">Edit</a>
+            </div>
+        <% } %>    
+    <% } %>    
     
     <div class ="row">
         <a href="/sites/<%= site._id %>/comments/new" class="btn">Add a new comment</a>
@@ -26,10 +30,12 @@
                   <img src="http://www.florencevillas.com/assets/73755607/images/img-testimonial.jpg" alt="" class="circle">
                   <span class="title"><%= foundComment.author.username %></span>
                   <p><%= foundComment.text %><br>
-                      <a href="/sites/<%= site._id %>/comments/<%= foundComment._id %>/edit" class="btn">Edit</a>
-                      <form id="delete-form" action="/sites/<%=site._id %>/comments/<%=foundComment._id %>?_method=DELETE" method="POST">
-                          <input type="submit" class="btn red darken-4" value="Delete">
-                      </form>
+                      <% if (isAuthenticated() && foundComment.author.id.equals(currentUser._id)){ %>
+                          <a href="/sites/<%= site._id %>/comments/<%= foundComment._id %>/edit" class="btn">Edit</a>
+                          <form id="delete-form" action="/sites/<%=site._id %>/comments/<%=foundComment._id %>?_method=DELETE" method="POST">
+                              <input type="submit" class="btn red darken-4" value="Delete">
+                          </form>
+                      <% } %>      
                   </p>
                   <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
               </li>
