@@ -17,8 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 
-// mongoose.connect("mongodb://localhost/fishing_site", {useMongoClient: true});
-mongoose.connect("mongodb://fishinguser:fishing123456@ds143678.mlab.com:43678/fishing-site", {useMongoClient: true});
+mongoose.connect(process.env.DATABASEURL, {useMongoClient: true});
 // SeedDB();
 
 // Require routes
