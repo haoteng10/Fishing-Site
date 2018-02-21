@@ -10,6 +10,8 @@ var LocalStrategy = require("passport-local");
 
 var User = require("./models/User");
 
+var middleware = require("./middleware");
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
@@ -38,7 +40,7 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
-   res.locals.isAuthenticated = req.isAuthenticated;
+//   res.locals.isAuthenticated = middleware.isLoggedIn; This is not working
    next();
 });
 

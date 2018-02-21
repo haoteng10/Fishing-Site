@@ -51,11 +51,25 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 
 router.get("/:id",function(req, res) {
     Sites.findById(req.params.id).populate("comments").exec(function(err, foundSite){
+        
+        var LoggedIn = false;
+        var trueSiteOwnership = false;
+        
         if(err){
             console.log(err);
         } else {
+           
+           if(req.isAuthenticated()){
+               LoggedIn = true;
+               if (foundSite.author.id.equals(req.user._id)) {
+               trueSiteOwnership = true;
+             }
+           }
+           
+            // console.log(req.user._id);
             //render show template with that fishingSite
-            res.render("FishingSites/show", {site: foundSite});
+            res.render("FishingSites/show", {site: foundSite, trueSiteOwnership: trueSiteOwnership, LoggedIn: LoggedIn});
+            
         }});
     });
 
@@ -67,7 +81,7 @@ router.delete("/:id", middleware.checkSiteOwnership, function(req,res) {
            site.remove();
            res.redirect("/sites");
        }
-   }) 
+   });
 });
 
 router.get("/:id/edit", middleware.checkSiteOwnership, function(req, res){
