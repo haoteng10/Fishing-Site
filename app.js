@@ -1,31 +1,34 @@
-var express = require("express");
-var app = express();
+const express = require("express");
+const app = express();
 
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-var methodOverride = require("method-override");
-var SeedDB = require("./seeds");
-var passport = require("passport");
-var LocalStrategy = require("passport-local");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
+// const SeedDB = require("./seeds");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
-var User = require("./models/User");
+const User = require("./models/User");
 
-var middleware = require("./middleware");
+// const middleware = require("./middleware");
+
+require("dotenv").config();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 
+mongoose.Promise = require("bluebird");
 
-var url = process.env.DATABASEURL || "mongodb://localhost/fishing_site";
-mongoose.connect(url, {useMongoClient: true});
+const url = process.env.DATABASEURL || "mongodb://localhost/fishing_site";
+mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false });
 // SeedDB();
 
 // Require routes
-var indexRoutes = require("./routes/index");
-var sitesRoutes = require("./routes/FishingSites");
-var commentRoutes = require("./routes/Comments");
+const indexRoutes = require("./routes/index");
+const sitesRoutes = require("./routes/FishingSites");
+const commentRoutes = require("./routes/Comments");
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -51,6 +54,6 @@ app.use("/", indexRoutes);
 app.use("/sites", sitesRoutes);
 app.use("/sites/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(3000, process.env.IP, function(){
    console.log("The Server Has Started!");
 });

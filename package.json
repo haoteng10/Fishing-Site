@@ -10,14 +10,25 @@
   "author": "MysteryQ",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.18.2",
+    "dotenv": "^8.2.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "method-override": "^2.3.10",
-    "mongoose": "^4.13.8",
+    "mongoose": "^5.9.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.5.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haoteng10/Fishing-site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/haoteng10/Fishing-site/issues"
+  },
+  "homepage": "https://github.com/haoteng10/Fishing-site#readme"
 }
