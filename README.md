@@ -1,7 +1,7 @@
 # Fishing-Site 
-**(Public)**: [https://afternoon-lake-41605.herokuapp.com/](https://afternoon-lake-41605.herokuapp.com/)
+**(Public)**: [https://fishing.haoteng.xyz/](https://fishing.haoteng.xyz/)
 
 -----------------------------------------------------
 Usage after Installation:
 
-`node app.js`
+`npm run start`

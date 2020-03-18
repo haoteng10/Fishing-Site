@@ -14,6 +14,8 @@ const User = require("./models/User");
 
 require("dotenv").config();
 
+const PORT = process.env.PORT || 3000;
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
@@ -54,6 +56,6 @@ app.use("/", indexRoutes);
 app.use("/sites", sitesRoutes);
 app.use("/sites/:id/comments", commentRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
+app.listen(PORT, process.env.IP, function(){
    console.log("The Server Has Started!");
 });
