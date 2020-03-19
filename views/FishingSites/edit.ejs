@@ -13,13 +13,16 @@
               <label for="url">Image URL</label>
         </div>
         <div class="input-field col s12">
-            <select name="site[location]" form="edit" value="<%= site.location %>">
+            <select name="site[location]" form="new">
                 <optgroup label="New York">
                     <option value="NYC" >New York City</option>
+                    <option value="Buffalo">Buffalo</option>
+                    <option value="Albany">Albany</option>
                 </optgroup>
                 <optgroup label="California">
                     <option value="LA">Los Angelas</option>
-                 </optgroup>
+                    <option value="SFO">San Francisco</option>
+                </optgroup>
             </select>
             <label>Choose the location</label>    
         </div>
